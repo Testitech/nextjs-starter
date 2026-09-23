@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+﻿# Next.js Starter
 
-## Getting Started
+A clean, reusable starting point for small-to-large Next.js projects.
 
-First, run the development server:
+## Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Next.js 16.3.4 with the App Router
+- React 19.2.8
+- TypeScript
+- Tailwind CSS v4
+- ESLint
+- pnpm
+
+## Folder structure
+
+```text
+app/                 Routes, layouts, metadata, and global styles
+components/          Reusable UI and project-level components
+hooks/               Custom React hooks
+lib/                 Utilities, constants, and site configuration
+types/               Shared TypeScript types
+public/images/       Static images
+public/icons/        Static icons
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Create only the folders you need as the project grows. The default favicon remains in `app/favicon.ico`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Create a project from this starter
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copy or clone the repository, then install dependencies:
 
-## Learn More
+```bash
+pnpm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+Update `lib/site.ts`, then replace the starter homepage in `app/page.tsx` with your project UI.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Environment variables
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Copy `.env.example` to `.env.local` and set `NEXT_PUBLIC_SITE_URL`. It is used for absolute metadata, robots, and sitemap URLs. Do not commit `.env.local` or secrets.
 
-## Deploy on Vercel
+## Metadata and social images
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Global metadata is configured in `app/layout.tsx` and derives shared values from `lib/site.ts`. Modify `app/opengraph-image.tsx`, `app/twitter-image.tsx`, or their shared design in `lib/metadata-image.tsx`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Robots and sitemap
+
+- `app/robots.ts` generates `/robots.txt`.
+- `app/sitemap.ts` generates `/sitemap.xml`; add future public routes to its `routes` array.
+
+## Run locally
+
+```bash
+pnpm dev
+```
+
+Open http://localhost:3000.
+
+## Validate and build
+
+```bash
+pnpm lint
+pnpm build
+pnpm start
+```
